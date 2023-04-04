@@ -1,0 +1,38 @@
+#include<iostream>
+using namespace std;
+void Palindrome(int);
+int main()
+{
+    int num;
+    while(1)
+    {
+        cout<<"Input    :  x  =  ";
+        cin>>num;
+        if(num>=-231 && num<=231)
+            break;
+        else
+            cout<<"Enter the number in correct range"<<endl;
+    }
+    Palindrome(num);
+    return 0;
+}
+
+void Palindrome(int n)
+{
+    if(n<10)
+    {
+        cout<<"Output   : False"<<endl;
+        return;
+    }
+    int temp=0,num=n;
+    while(n)
+    {
+        temp=temp*10+(n%10);
+        n=n/10;
+    }
+
+    if(num==temp)
+        cout<<"Output   : True"<<endl;
+    else
+        cout<<"Output   : False"<<endl;
+}
