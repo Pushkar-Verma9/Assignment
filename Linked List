@@ -1,0 +1,196 @@
+#include<iostream>
+#include<cstdlib>
+using namespace std;
+
+class node
+{
+	public:
+		int value;
+		node *next;
+		node()
+		{
+			value=0;
+			next=NULL;
+		}
+};
+
+class LinkedList
+{
+	private:
+		node *head=NULL;
+		int size=0;
+	public:
+		void insert_End(int num)
+		{
+			node *temp=new node;
+			temp->value=num;
+			
+			if(head==NULL)
+			{
+				head=temp;
+				size++;
+				return;
+			}
+
+			node *a=head;
+			while(a->next!=NULL)
+			{
+				a=a->next;
+			}
+			a->next=temp;
+			size++;
+		}
+		
+		void insert_Front(int num)
+		{
+			node *temp=new node;
+			temp->value=num;
+
+			if(head==NULL)
+			{
+				head=temp;
+				size++;
+				return;
+			}
+			
+			temp->next=head;
+			head=temp;
+			size++;
+		}
+		
+		void insert_Middle(int num,int n)
+		{
+			node *temp=new node;
+			temp->value=num;
+
+			if(head==NULL)
+			{
+				head=temp;
+				size++;
+				return;
+			}
+			
+			node *a=head;
+			if(n==1)
+			{
+				insert_Front(num);
+				return;
+			}
+			for(int i=0;i<n-2;i++)
+			{
+				a=a->next;
+			}
+			node *b=a->next;
+			a->next=temp;
+			temp->next=b;
+			size++;
+		}
+		
+		void del(int n)
+		{
+			if(head==NULL)
+			{
+				cout<<"Linked List Empty";
+				return;
+			}
+			node *a=head;
+			if(n==1)
+			{
+				head=a->next;
+				delete a;
+				size--;
+				return ;
+			}
+			for(int i=0;i<n-2;i++)
+			{
+				a=a->next;
+			}
+			node *b=a->next;
+			a->next=b->next;
+			delete b;
+			size--;
+		}
+		
+		void sort_Asc()
+		{
+			node *a=head;
+			if(a==NULL)
+			{
+				cout<<"Linked List is Empty"<<endl;
+				return ;
+			}
+			else
+			{
+				while(a->next!=NULL)
+				{
+					node *b=a->next;
+					while(b!=NULL)
+					{
+						if(a->value>b->value)
+						{
+							int temp=a->value;
+							a->value=b->value;
+							b->value=temp;
+						}
+						b=b->next;
+					}
+					a=a->next;
+				}
+			}
+		}
+		
+		void sort_Desc()
+		{
+			node *a=head;
+			if(a==NULL)
+			{
+				cout<<"Linked List is Empty"<<endl;
+				return ;
+			}
+			else
+			{
+				while(a->next!=NULL)
+				{
+					node *b=a->next;
+					while(b!=NULL)
+					{
+						if(a->value<b->value)
+						{
+							int temp=a->value;
+							a->value=b->value;
+							b->value=temp;
+						}
+						b=b->next;
+					}
+					a=a->next;
+				}
+			}
+		}
+		
+		void print()
+		{
+			node *a=head;
+			if(a==NULL)
+			{
+				cout<<"Linked List is Empty"<<endl;
+				return ;
+			}
+			
+			while(a!=NULL)
+			{
+				if(a->next==NULL)
+				{
+					cout<<a->value<<endl;
+					return;
+				}
+				cout<<a->value<<"->";
+				a=a->next;
+			}
+			cout<<endl;
+		}
+		
+		void Size()
+		{
+			cout<<"Size = "<<size<<endl;
+		}
+};
